@@ -1,0 +1,20 @@
+/**
+ * @jest-environment node
+ */
+import 'jsdom-global/register';
+import renderer from 'react-test-renderer';
+import React from "react";
+import { shallow, mount, render, configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+configure({ adapter: new Adapter() });
+
+import { Button } from "../ButtonWithKnobs";
+import 'jest-styled-components';
+
+
+describe("Button", () => {
+  it("adds hover css", () => {
+    const Btn = renderer.create(<Button hover={false} size='small'></Button>).toJSON();
+    expect(Btn).toMatchSnapshot();
+  });
+});
